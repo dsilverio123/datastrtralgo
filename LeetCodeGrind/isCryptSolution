@@ -1,0 +1,27 @@
+
+isCryptSolution
+
+crypt:
+["ONE", 
+ "ONE", 
+ "TWO"]
+solution:
+[["O","2"], 
+ ["T","4"], 
+ ["W","6"], 
+ ["E","1"], 
+ ["N","3"]]
+ 
+ def solution(crypt, solution):
+    # Create a dictionary mapping letters to digits
+    mapping = {letter: digit for letter, digit in solution}
+    
+    # Convert each word in the cryptarithm to its corresponding digit string
+    digit_words = ["".join(mapping[letter] for letter in word) for word in crypt]
+    
+    # Check for leading zeroes
+    if any(word.startswith('0') and len(word) > 1 for word in digit_words):
+        return False
+        
+    # Convert the digit strings to integers and check if the equation holds true
+    return int(digit_words[0]) + int(digit_words[1]) == int(digit_words[2])
